@@ -1,23 +1,42 @@
+const smartself = []
 let iva = 1.21
-let PrecioProducto = 0
+let ProductPrice = 0
 let salirMenu = true
+class Product {
+    constructor(id, name, brand, price){
+        this.id = id,
+        this.name = productName,
+        this.brand = productBrand,
+        this.price = productPrice
 
-function agregarProducto () {
-    let nombreProducto = prompt("Ingrese el nombre del Producto")
-    let marcaProducto = prompt('Ingrese la marca del Producto')
-    let precioProducto = prompt('Ingrese el precio del Producto')
-    if (!isNaN(precioProducto)){
-        PrecioProducto = precioProducto
+function addProduct (array) {
+    let productName = prompt("Ingrese el nombre del Producto")
+    let productBrand = prompt('Ingrese la marca del Producto')
+    let productPrice = parseInt(prompt('Ingrese el precio del Producto'))
+    if (!isNaN(productPrice)){
+        ProductPrice = productPrice
     }
     else{ 
         alert('el precio ingresado debe ser un numero')
     }
-    console.log (`${nombreProducto} ${marcaProducto} ${precioProducto}`)
+    console.log (`${productName} ${productBrand} ${productPrice}`)
+    const newProduct = new Product (array.length+1, productName, productBrand,productPrice)
+    console.log(newProduct)
+    array.push(newProduct)
+    console.log(array)
 }
-function borrarProducto () {
-    let nombreProducto = prompt("Ingrese el nombre del producto")
-    let marcaProducto = prompt('Ingrese la marca del Producto')
-    console.log ('El producto ha sido borrado')
+function borrarProducto (array) {
+    let deleteProduct = prompt('Ingrese el nombre del producto que desea borrar')
+    let search = array.filter(
+        (Product) => Product.productName.toLowerCase() == deleteProduct.toLowerCase()
+    )
+    if (search == true){
+        delete Product
+        console.log ('El producto ha sido borrado')
+    }
+    else{
+        alert ('el producto ingresado es inexistente')
+    }
 }
 
  do {  
@@ -29,10 +48,10 @@ function borrarProducto () {
      0 - Salir del ménu`)
      switch(opcionMenu){
          case "1":
-             agregarProducto()
+            addProduct (smartself)
          break
         case "2":
-            borrarProducto()
+            borrarProducto(smartself)
          break
          case "3":
              PrecioProducto == 0 ? alert('No hay productos ingresados, el precio final es 0') : 
