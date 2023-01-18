@@ -1,17 +1,22 @@
 const smartself = []
 let iva = 1.21
 let ProductPrice = 0
+let ProductName = ""
+let ProductBrand = ""
 let salirMenu = true
 class Product {
     constructor(id, name, brand, price){
         this.id = id,
-        this.name = productName,
-        this.brand = productBrand,
-        this.price = productPrice
-
+        this.name = ProductName,
+        this.brand = ProductBrand,
+        this.price = ProductPrice
+    }
+}
 function addProduct (array) {
     let productName = prompt("Ingrese el nombre del Producto")
+    ProductName = productName
     let productBrand = prompt('Ingrese la marca del Producto')
+    ProductBrand = productBrand
     let productPrice = parseInt(prompt('Ingrese el precio del Producto'))
     if (!isNaN(productPrice)){
         ProductPrice = productPrice
@@ -20,15 +25,24 @@ function addProduct (array) {
         alert('el precio ingresado debe ser un numero')
     }
     console.log (`${productName} ${productBrand} ${productPrice}`)
+
     const newProduct = new Product (array.length+1, productName, productBrand,productPrice)
     console.log(newProduct)
     array.push(newProduct)
     console.log(array)
+    function showProductList (array){
+        console.log("La productos seleccionados son:")
+        array.forEach(
+            (Product)=>{
+                console.log(`${Product.id} - ${Product.name} - ${Product.brand} $ ${Product.price}`)
+            }
+        )
+    }
 }
 function borrarProducto (array) {
     let deleteProduct = prompt('Ingrese el nombre del producto que desea borrar')
     let search = array.filter(
-        (Product) => Product.productName.toLowerCase() == deleteProduct.toLowerCase()
+        (Product) => Product.name() == deleteProduct()
     )
     if (search == true){
         delete Product
