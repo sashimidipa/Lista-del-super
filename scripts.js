@@ -30,27 +30,25 @@ function addProduct (array) {
     console.log(newProduct)
     array.push(newProduct)
     console.log(array)
-    function showProductList (array){
-        console.log("La productos seleccionados son:")
-        array.forEach(
-            (Product)=>{
-                console.log(`${Product.id} - ${Product.name} - ${Product.brand} $ ${Product.price}`)
-            }
-        )
-    }
 }
-function borrarProducto (array) {
-    let deleteProduct = prompt('Ingrese el nombre del producto que desea borrar')
+
+function deleteProduct (array) {
+    let productSelection = prompt('Ingrese el nombre del producto que desea borrar')
     let search = array.filter(
-        (Product) => Product.name() == deleteProduct()
+        (prod) => prod.name.toLocaleLowerCase() == productSelection.toLocaleLowerCase()
     )
-    if (search == true){
-        delete Product
+    if (search.length == 0){
+        
         console.log ('El producto ha sido borrado')
     }
     else{
         alert ('el producto ingresado es inexistente')
     }
+}
+
+function calcTot (array){
+    array.forEach(element => { console.log('el total de su compra es: ' + (sumar(element.price)))  
+    })
 }
 
  do {  
@@ -65,11 +63,10 @@ function borrarProducto (array) {
             addProduct (smartself)
          break
         case "2":
-            borrarProducto(smartself)
+            deleteProduct(smartself)
          break
          case "3":
-             PrecioProducto == 0 ? alert('No hay productos ingresados, el precio final es 0') : 
-             console.log (PrecioProducto * iva)
+            calcTot (smartself)
          break
          case "0":
              console.log("Salir del menu")
