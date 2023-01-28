@@ -1,23 +1,65 @@
+const smartself = []
 let iva = 1.21
-let PrecioProducto = 0
+let ProductPrice = 0
+let ProductName = ""
+let ProductBrand = ""
 let salirMenu = true
-
-function agregarProducto () {
-    let nombreProducto = prompt("Ingrese el nombre del Producto")
-    let marcaProducto = prompt('Ingrese la marca del Producto')
-    let precioProducto = prompt('Ingrese el precio del Producto')
-    if (!isNaN(precioProducto)){
-        PrecioProducto = precioProducto
+class Product {
+    constructor(id, name, brand, price){
+        this.id = id,
+        this.name = ProductName,
+        this.brand = ProductBrand,
+        this.price = ProductPrice
+    }
+}
+function addProduct (array) {
+    let productName = prompt("Ingrese el nombre del Producto")
+    ProductName = productName
+    let productBrand = prompt('Ingrese la marca del Producto')
+    ProductBrand = productBrand
+    let productPrice = parseInt(prompt('Ingrese el precio del Producto'))
+    if (!isNaN(productPrice)){
+        ProductPrice = productPrice
     }
     else{ 
         alert('el precio ingresado debe ser un numero')
     }
-    console.log (`${nombreProducto} ${marcaProducto} ${precioProducto}`)
+    console.log (`${productName} ${productBrand} ${productPrice}`)
+
+    const newProduct = new Product (array.length+1, productName, productBrand,productPrice)
+    console.log(newProduct)
+    array.push(newProduct)
+    console.log(array)
 }
-function borrarProducto () {
-    let nombreProducto = prompt("Ingrese el nombre del producto")
-    let marcaProducto = prompt('Ingrese la marca del Producto')
-    console.log ('El producto ha sido borrado')
+
+function deleteProduct (array) {
+    let prodString = [];
+    let list = 'La lista de objetos es:';
+        array.forEach(
+            (prod)=>{
+                prodString.push(`\n ${prod.id} - ${prod.name} - ${prod.brand} que vale ${prod.price}`)
+            }
+        )
+        for (let m in prodString){
+            list = list + prodString[m];
+        }
+    let productSelection = prompt(list + '\n seleccione el producto a borrar');
+    
+    
+    // let productSelection = prompt('Ingrese el nombre del producto que desea borrar')
+
+    if ((productSelection) <= array.length){
+        array.splice((productSelection -1), productSelection)
+        alert ('el producto ingresado ha sido borrado')
+    }
+    else{
+        alert ('el producto ingresado es inexistente')
+    }
+}
+
+function calcTot (array){
+    array.forEach(element => { console.log('el total de su compra es: ' + (sumar(element.price)))  
+    })
 }
 
  do {  
@@ -29,14 +71,13 @@ function borrarProducto () {
      0 - Salir del ménu`)
      switch(opcionMenu){
          case "1":
-             agregarProducto()
+            addProduct (smartself)
          break
         case "2":
-            borrarProducto()
+            deleteProduct(smartself)
          break
          case "3":
-             PrecioProducto == 0 ? alert('No hay productos ingresados, el precio final es 0') : 
-             console.log (PrecioProducto * iva)
+            calcTot (smartself)
          break
          case "0":
              console.log("Salir del menu")
