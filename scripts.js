@@ -23,38 +23,33 @@ clearBtn.addEventListener("click", clearItems);
 window.addEventListener("DOMContentLoaded", setupItems);
 
 // ****** functions **********
-// test firs time 
+// First time 
 function showWellcome() {
   if (localStorage.getItem("isMyFirstTime")){
   localStorage.setItem("isMyFirstTime", false)
   } else {
     localStorage.setItem("isMyFirstTime", true)
     swal({
-      title: "Veo que es la primera vez que usas la APP te gustaria que precarguemos una pequeña lista como demo para que aprendas a usar los elementos de la nuestra",
-      text: "Once deleted, you will not be able to recover this imaginary file!",
-      icon: "warning",
+      title: "Veo que es la primera vez que usas la app te gustaria que precarguemos una pequeña lista como demo para que aprendas a usar los elementos de la nuestra",
+      text: "Una vez cargada la lista podras usar los botones de edicion o eliminar para cambiarla o vaciar la lista y crear la tuya propia",
+      icon: "info",
       buttons: true,
       dangerMode: true,
     })
-    .then((willDelete) => {
-      if (willDelete) {
+    .then((willAccept) => {
+      if (willAccept) {
         fetch('https://run.mocky.io/v3/2a3b66c6-306e-43d2-87ff-86011181d37d')
       .then( (resp) => resp.json())
-      .then( (json) => console.log(parsedJason = json))
-      //.then ((parsedJason) => console.log(JSON.stringify(parsedJason)))
-      .then((parsedJason) => additems(parsedJason))
+      .then( (json) => console.log(ar = json))
+      .then((ar) => additems(parsedJason))
       } else {
-        swal("Your imaginary file is safe!");
+        swal("Que disfrutes tu experiencia!!");
       }
-      localStorage.setItem("isNotMyFirstTime", true)
     });
   }
-
 } 
-
 function additems(){
-
-  parsedJason.forEach(function (Item) {
+  ar.forEach(function (Item) {
     const value = Item.value;
     const id = new Date().getTime().toString();
     const element = document.createElement("article");
@@ -81,19 +76,6 @@ function additems(){
 
     // append child
     list.appendChild(element);
-    // display alert
-    Toastify({
-      text: "El producto se ha agregado con exito",
-      duration: 3000,
-      close: true,
-      gravity: "top", // `top` or `bottom`
-      position: "center", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
-      style: {
-        background: "linear-gradient(to right, #00b09b, #96c93d)",
-      },
-      onClick: function(){} // Callback after click
-    }).showToast();
     // show container
     container.classList.add("show-container");
     // set local storage
@@ -107,7 +89,6 @@ function addItem(e) {
   e.preventDefault();
   const value = grocery.value;
   const id = new Date().getTime().toString();
-
   if (value !== "" && !editFlag) {
     const element = document.createElement("article");
     let attr = document.createAttribute("data-id");
@@ -138,13 +119,13 @@ function addItem(e) {
       text: "El producto se ha agregado con exito",
       duration: 3000,
       close: true,
-      gravity: "top", // `top` or `bottom`
-      position: "center", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
+      gravity: "top", 
+      position: "center", 
+      stopOnFocus: true,
       style: {
         background: "linear-gradient(to right, #00b09b, #96c93d)",
       },
-      onClick: function(){} // Callback after click
+      onClick: function(){}
     }).showToast();
     // show container
     container.classList.add("show-container");
@@ -158,13 +139,13 @@ function addItem(e) {
       text: "El producto se ha sido editado exitosamente",
       duration: 3000,
       close: true,
-      gravity: "top", // `top` or `bottom`
-      position: "center", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
+      gravity: "top", 
+      position: "center",
+      stopOnFocus: true, 
       style: {
         background: "linear-gradient(to right, #00b09b, #96c93d)",
       },
-      onClick: function(){} // Callback after click
+      onClick: function(){} 
     }).showToast();
 
     // edit  local storage
@@ -175,27 +156,16 @@ function addItem(e) {
       text: "Por favor ingrese un producto",
       duration: 3000,
       close: true,
-      gravity: "top", // `top` or `bottom`
-      position: "center", // `left`, `center` or `right`
-      stopOnFocus: true, // Prevents dismissing of toast on hover
+      gravity: "top", 
+      position: "center", 
+      stopOnFocus: true,
       style: {
-        background: "linear-gradient(to right, #00b09b, #96c93d)",
+        background: "linear-gradient(to right, #b02f00, #c93d3d)",
       },
-      onClick: function(){} // Callback after click
+      onClick: function(){} 
     }).showToast();
   }
 }
-// // display alert
-// function displayAlert(text, action) {
-//   alert.textContent = text;
-//   alert.classList.add(`alert-${action}`);
-//   // remove alert
-//   setTimeout(function () {
-//     alert.textContent = "";
-//     alert.classList.remove(`alert-${action}`);
-//   }, 1000);
-// }
-
 // clear items
 function clearItems() {
   const items = document.querySelectorAll(".grocery-item");
@@ -209,13 +179,13 @@ function clearItems() {
     text: "La lista ha sido vaciada",
     duration: 3000,
     close: true,
-    gravity: "top", // `top` or `bottom`
-    position: "center", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
+    gravity: "top", 
+    position: "center", 
+    stopOnFocus: true, 
     style: {
-      background: "linear-gradient(to right, #00b09b, #96c93d)",
+      background: "linear-gradient(to right, #b02f00, #c93d3d)",
     },
-    onClick: function(){} // Callback after click
+    onClick: function(){} 
   }).showToast();
   setBackToDefault();
   localStorage.removeItem("list");
@@ -236,13 +206,13 @@ function deleteItem(e) {
     text: "El producto ha sido eliminado",
     duration: 3000,
     close: true,
-    gravity: "top", // `top` or `bottom`
-    position: "center", // `left`, `center` or `right`
-    stopOnFocus: true, // Prevents dismissing of toast on hover
+    gravity: "top", 
+    position: "center", 
+    stopOnFocus: true, 
     style: {
-      background: "linear-gradient(to right, #00b09b, #96c93d)",
+      background: "linear-gradient(to right, #b02f00, #c93d3d)",
     },
-    onClick: function(){} // Callback after click
+    onClick: function(){} 
   }).showToast();
 
   setBackToDefault();
