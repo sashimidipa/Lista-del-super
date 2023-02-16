@@ -58,6 +58,7 @@ function additems(){
     element.setAttributeNode(attr);
     element.classList.add("grocery-item");
     element.innerHTML = `<p class="title">${value}</p>
+              <input class="price" type="text" placeholder= "$$$">
             <div class="btn-container">
               <!-- edit btn -->
               <button type="button" class="edit-btn">
@@ -96,6 +97,7 @@ function addItem(e) {
     element.setAttributeNode(attr);
     element.classList.add("grocery-item");
     element.innerHTML = `<p class="title">${value}</p>
+              <input class="price" type="text" placeholder= "$$$">
             <div class="btn-container">
               <!-- edit btn -->
               <button type="button" class="edit-btn">
@@ -300,6 +302,7 @@ function createListItem(id, value) {
   element.setAttributeNode(attr);
   element.classList.add("grocery-item");
   element.innerHTML = `<p class="title">${value}</p>
+              <input class="price" type="text" placeholder= "$$$">
             <div class="btn-container">
               <!-- edit btn -->
               <button type="button" class="edit-btn">
