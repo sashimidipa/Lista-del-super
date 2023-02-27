@@ -1,11 +1,11 @@
-// ****** select items **********
+// ****** item selection **********
 
-const form = document.querySelector(".grocery-form");
+const form = document.querySelector(".market-form");
 const alert = document.querySelector(".alert");
-const grocery = document.getElementById("grocery");
+const market = document.getElementById("market");
 const submitBtn = document.querySelector(".submit-btn");
-const container = document.querySelector(".grocery-container");
-const list = document.querySelector(".grocery-list");
+const container = document.querySelector(".market-container");
+const list = document.querySelector(".market-list");
 const clearBtn = document.querySelector(".clear-btn");
 let parsedJason = [];
 // edit option
@@ -24,6 +24,13 @@ window.addEventListener("DOMContentLoaded", setupItems);
 
 // ****** functions **********
 // First time 
+const demoList = async () => {
+        const nuList= await fetch('https://run.mocky.io/v3/2a3b66c6-306e-43d2-87ff-86011181d37d')
+        console.log(nuList)
+        const data = await nuList.json()
+        .then( (json) => console.log(ar = json))
+        .then((ar) => additems(parsedJason)) 
+}
 function showWellcome() {
   if (localStorage.getItem("isMyFirstTime")){
   localStorage.setItem("isMyFirstTime", false)
@@ -37,12 +44,9 @@ function showWellcome() {
       dangerMode: true,
     })
     .then((willAccept) => {
-      if (willAccept) {
-        fetch('https://run.mocky.io/v3/2a3b66c6-306e-43d2-87ff-86011181d37d')
-      .then( (resp) => resp.json())
-      .then( (json) => console.log(ar = json))
-      .then((ar) => additems(parsedJason))
-      } else {
+      if (willAccept) { 
+        demoList()
+      } else{
         swal("Que disfrutes tu experiencia!!");
       }
     });
@@ -56,9 +60,8 @@ function additems(){
     let attr = document.createAttribute("data-id");
     attr.value = id;
     element.setAttributeNode(attr);
-    element.classList.add("grocery-item");
+    element.classList.add("market-item");
     element.innerHTML = `<p class="title">${value}</p>
-              <input class="price" type="text" placeholder= "$$$">
             <div class="btn-container">
               <!-- edit btn -->
               <button type="button" class="edit-btn">
@@ -69,7 +72,6 @@ function additems(){
                 <i class="fas fa-trash"></i>
               </button>
             </div>`;
-    // add event listeners to both buttons;
     const deleteBtn = element.querySelector(".delete-btn");
     deleteBtn.addEventListener("click", deleteItem);
     const editBtn = element.querySelector(".edit-btn");
@@ -86,18 +88,18 @@ function additems(){
   });
 }
 // add item
+
 function addItem(e) {
   e.preventDefault();
-  const value = grocery.value;
+  const value = market.value;
   const id = new Date().getTime().toString();
   if (value !== "" && !editFlag) {
     const element = document.createElement("article");
     let attr = document.createAttribute("data-id");
     attr.value = id;
     element.setAttributeNode(attr);
-    element.classList.add("grocery-item");
+    element.classList.add("market-item");
     element.innerHTML = `<p class="title">${value}</p>
-              <input class="price" type="text" placeholder= "$$$">
             <div class="btn-container">
               <!-- edit btn -->
               <button type="button" class="edit-btn">
@@ -108,7 +110,6 @@ function addItem(e) {
                 <i class="fas fa-trash"></i>
               </button>
             </div>`;
-    // add event listeners to both buttons;
     const deleteBtn = element.querySelector(".delete-btn");
     deleteBtn.addEventListener("click", deleteItem);
     const editBtn = element.querySelector(".edit-btn");
@@ -169,8 +170,9 @@ function addItem(e) {
   }
 }
 // clear items
+
 function clearItems() {
-  const items = document.querySelectorAll(".grocery-item");
+  const items = document.querySelectorAll(".market-item");
   if (items.length > 0) {
     items.forEach(function (item) {
       list.removeChild(item);
@@ -227,7 +229,7 @@ function editItem(e) {
   // set edit item
   editElement = e.currentTarget.parentElement.previousElementSibling;
   // set form value
-  grocery.value = editElement.innerHTML;
+  market.value = editElement.innerHTML;
   editFlag = true;
   editID = element.dataset.id;
   //
@@ -235,7 +237,7 @@ function editItem(e) {
 }
 // set backt to defaults
 function setBackToDefault() {
-  grocery.value = "";
+  market.value = "";
   editFlag = false;
   editID = "";
   submitBtn.textContent = "agregar";
@@ -245,9 +247,9 @@ function setBackToDefault() {
 
 // add to local storage
 function addToLocalStorage(id, value) {
-  const grocery = { id, value };
+  const market = { id, value };
   let items = getLocalStorage();
-  items.push(grocery);
+  items.push(market);
   localStorage.setItem("list", JSON.stringify(items));
 }
 
@@ -300,9 +302,8 @@ function createListItem(id, value) {
   let attr = document.createAttribute("data-id");
   attr.value = id;
   element.setAttributeNode(attr);
-  element.classList.add("grocery-item");
+  element.classList.add("market-item");
   element.innerHTML = `<p class="title">${value}</p>
-              <input class="price" type="text" placeholder= "$$$">
             <div class="btn-container">
               <!-- edit btn -->
               <button type="button" class="edit-btn">
@@ -314,7 +315,6 @@ function createListItem(id, value) {
               </button>
             </div>
           `;
-  // add event listeners to both buttons;
   const deleteBtn = element.querySelector(".delete-btn");
   deleteBtn.addEventListener("click", deleteItem);
   const editBtn = element.querySelector(".edit-btn");

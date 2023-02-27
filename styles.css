@@ -58,25 +58,31 @@ Variables
 Global Styles
 ===============
 */
-
-*,
-::after,
-::before {
-  margin: 0;
-  padding: 0;
+html {
   box-sizing: border-box;
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 body {
   font-family: var(--ff-secondary);
   background: var(--clr-grey-10);
   color: var(--clr-grey-1);
   line-height: 1.5;
+  margin: 0;
   font-size: 0.875rem;
 }
 .swal-title{
   font-size: 16px;
 }
 ul {
+  margin: 0;
+  padding-right: 0;
+  padding-left: 0;
   list-style-type: none;
 }
 a {
@@ -86,15 +92,20 @@ img:not(.logo) {
   width: 100%;
 }
 img {
+  max-width: 100%;
   display: block;
 }
 
 h1,h2,h3,h4 {
+  margin: 0;
+  padding-right: 0;
+  padding-left: 0;
   letter-spacing: var(--spacing);
   text-transform: capitalize;
   line-height: 1.25;
   margin-bottom: 0.75rem;
   font-family: var(--ff-primary);
+  display: block;
 }
 h1 {
   font-size: 3rem;
@@ -109,9 +120,50 @@ h4 {
   font-size: 0.875rem;
 }
 p {
-  margin-bottom: 1.25rem;
+  margin: 0;
+  padding-right: 0;
+  padding-left: 0;
   color: var(--clr-grey-5);
 }
+input,
+button {
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  outline: none;
+  appearance: none;
+  text-align: left;
+}
+input:hover,
+input:active,
+input:focus,
+:root {
+  font-family: Helvetica, Arial, sans-serif;
+}
+html {
+  font-size: 175%;
+  font-weight: 300;
+  line-height: 1.3;
+}
+body {
+  align-items: center;
+  background-image: linear-gradient(236deg, #74ebd5, #acb6e5);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+.container {
+  max-width: 20em;
+}
+
+.container > p {
+  text-align: center;
+}
+
 @media screen and (min-width: 800px) {
   h1 {
     font-size: 4rem;
@@ -175,7 +227,7 @@ main {
 }
 /*
 =============== 
-Grocery List
+Market List
 ===============
 */
 .section-center {
@@ -213,7 +265,7 @@ Grocery List
   color: #155724;
   background: #d4edda;
 }
-.grocery-form h3 {
+.market-form h3 {
   color: var(--clr-primary-1);
   margin-bottom: 1.5rem;
   text-align: center;
@@ -222,7 +274,7 @@ Grocery List
   display: flex;
   justify-content: center;
 }
-#grocery {
+#market {
   padding: 0.25rem;
   padding-left: 1rem;
   background: var(--clr-grey-10);
@@ -233,7 +285,7 @@ Grocery List
   flex: 1 0 auto;
   color: var(--clr-grey-5);
 }
-#grocery::placeholder {
+#market::placeholder {
   font-family: var(--ff-secondary);
   color: var(--clr-grey-5);
 }
@@ -258,7 +310,7 @@ Grocery List
   color: var(--clr-white);
 }
 
-.grocery-container {
+.market-container {
   margin-top: 2rem;
   transition: var(--transition);
   visibility: hidden;
@@ -266,7 +318,7 @@ Grocery List
 .show-container {
   visibility: visible;
 }
-.grocery-item {
+.market-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -276,11 +328,11 @@ Grocery List
   border-radius: var(--radius);
   text-transform: capitalize;
 }
-.grocery-item:hover {
+.market-item:hover {
   color: var(--clr-grey-5);
   background: var(--clr-grey-10);
 }
-.grocery-item:hover .title {
+.market-item:hover .title {
   color: var(--clr-grey-5);
 }
 .title {
